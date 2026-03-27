@@ -13,8 +13,13 @@
 
     :root {
       --bg: #0a0a0a;
+      --bg-warm: #0d0c0a;
+      --bg-warmer: #12110f;
       --bg-card: #111111;
       --gold: #c9a96e;
+      --gold-light: #d4b87a;
+      --gold-dim: rgba(201,169,110,0.15);
+      --gold-glow: rgba(201,169,110,0.08);
       --text: #f5f0eb;
       --text-secondary: #a09888;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -76,12 +81,13 @@
       text-transform: uppercase;
       background: transparent;
       cursor: pointer;
-      transition: background 0.4s ease, color 0.4s ease;
+      transition: background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
     }
 
     .btn-gold:hover {
       background: var(--gold);
       color: var(--bg);
+      box-shadow: 0 4px 24px rgba(201,169,110,0.15);
     }
 
     .gold-rule {
@@ -89,6 +95,58 @@
       height: 1px;
       background: var(--gold);
       margin: 0 auto;
+    }
+
+    /* ─── DIAMOND DIVIDER ─── */
+    .diamond-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 0 24px;
+    }
+
+    .diamond-divider::before,
+    .diamond-divider::after {
+      content: '';
+      flex: 1;
+      max-width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,169,110,0.3), transparent);
+    }
+
+    .diamond-divider span {
+      color: var(--gold);
+      font-size: 0.5rem;
+      opacity: 0.6;
+    }
+
+    /* ─── SECTION HEADING UNDERLINE ─── */
+    .section-heading {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 16px;
+    }
+
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    /* ─── SECTION SUBTITLE ─── */
+    .section-subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-top: 12px;
     }
 
     /* ─── NAV ─── */
@@ -228,8 +286,12 @@
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.55);
       z-index: 1;
+      background:
+        linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.5) 35%, rgba(10,10,10,0.2) 55%, rgba(10,10,10,0.35) 100%),
+        radial-gradient(ellipse at top left, rgba(201,169,110,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at top right, rgba(201,169,110,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(201,169,110,0.05) 0%, transparent 40%);
     }
 
     .hero-content {
@@ -241,7 +303,7 @@
 
     .hero-title {
       font-family: var(--font-serif);
-      font-size: clamp(3rem, 6vw, 5rem);
+      font-size: clamp(2.5rem, 7vw, 5rem);
       font-weight: 400;
       line-height: 1.1;
       margin-bottom: 20px;
@@ -250,17 +312,62 @@
 
     .hero-tagline {
       font-size: 0.75rem;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       font-weight: 300;
       color: var(--text-secondary);
       margin-bottom: 48px;
     }
 
+    .hero .btn-gold {
+      animation: goldPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes goldPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(201,169,110,0); }
+      50% { box-shadow: 0 0 20px 2px rgba(201,169,110,0.15); }
+    }
+
+    /* Hero scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.5;
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    .hero-scroll-chevron {
+      width: 10px;
+      height: 10px;
+      border-right: 1px solid var(--gold);
+      border-bottom: 1px solid var(--gold);
+      transform: rotate(45deg);
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
     /* ─── PHILOSOPHY ─── */
     .philosophy {
       padding: 140px 24px;
       text-align: center;
+      background:
+        var(--bg-warm);
     }
 
     .philosophy-text {
@@ -276,7 +383,12 @@
     }
 
     /* ─── MENU ─── */
-    .menu-section { padding: 120px 0; }
+    .menu-section {
+      padding: 120px 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(201,169,110,0.02) 0%, transparent 60%),
+        var(--bg);
+    }
 
     .menu-header {
       text-align: center;
@@ -285,7 +397,7 @@
 
     .menu-header h2 {
       font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 16px;
+      margin-bottom: 8px;
     }
 
     .menu-header p {
@@ -296,25 +408,38 @@
     .menu-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 48px 64px;
+      gap: 32px;
       max-width: 900px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
-    .menu-item { border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 32px; }
+    .menu-item {
+      padding: 2.5rem;
+      background: linear-gradient(135deg, #151412, #1a1816);
+      border: 1px solid rgba(201,169,110,0.15);
+      transition: all 0.4s ease;
+    }
+
+    .menu-item:hover {
+      border-color: rgba(201,169,110,0.35);
+      box-shadow: 0 8px 32px rgba(201,169,110,0.08);
+    }
 
     .menu-item h3 {
-      font-size: 1.35rem;
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
       font-weight: 400;
-      margin-bottom: 8px;
-      color: var(--text);
+      margin-bottom: 10px;
+      color: var(--gold);
     }
 
     .menu-item p {
+      font-family: var(--font-sans);
+      font-weight: 300;
       font-size: 0.85rem;
       color: var(--text-secondary);
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     .menu-cta {
@@ -336,14 +461,111 @@
     .menu-cta a:hover { opacity: 0.7; }
 
     /* ─── WINE ─── */
-    .wine-section { padding: 120px 0; }
+    .wine-section {
+      padding: 120px 0;
+      background:
+        radial-gradient(ellipse at 80% 30%, rgba(201,169,110,0.03) 0%, transparent 60%),
+        var(--bg-warm);
+    }
 
     .wine-card {
+      position: relative;
       max-width: 800px;
       margin: 0 auto;
       padding: 72px 60px;
-      background: var(--bg-card);
+      background: linear-gradient(135deg, #151412, #1a1816);
+      border: 1px solid rgba(201,169,110,0.25);
       text-align: center;
+      overflow: hidden;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .wine-card:hover {
+      border-color: rgba(201,169,110,0.4);
+      box-shadow: 0 12px 48px rgba(201,169,110,0.1);
+    }
+
+    /* Decorative corner accents */
+    .wine-card::before,
+    .wine-card::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.35;
+      transition: opacity 0.4s ease;
+    }
+
+    .wine-card::before {
+      top: 16px;
+      left: 16px;
+      border-width: 1px 0 0 1px;
+    }
+
+    .wine-card::after {
+      bottom: 16px;
+      right: 16px;
+      border-width: 0 1px 1px 0;
+    }
+
+    .wine-card:hover::before,
+    .wine-card:hover::after {
+      opacity: 0.6;
+    }
+
+    /* Additional corner accents via inner element */
+    .wine-corners::before,
+    .wine-corners::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.35;
+      transition: opacity 0.4s ease;
+    }
+
+    .wine-corners::before {
+      top: 16px;
+      right: 16px;
+      border-width: 1px 1px 0 0;
+    }
+
+    .wine-corners::after {
+      bottom: 16px;
+      left: 16px;
+      border-width: 0 0 1px 1px;
+    }
+
+    .wine-card:hover .wine-corners::before,
+    .wine-card:hover .wine-corners::after {
+      opacity: 0.6;
+    }
+
+    .wine-corners {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .wine-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0.8;
+    }
+
+    .wine-badge-star {
+      font-size: 0.75rem;
     }
 
     .wine-card h2 {
@@ -360,8 +582,18 @@
       line-height: 1.8;
     }
 
+    .wine-card .btn-gold {
+      position: relative;
+      z-index: 1;
+    }
+
     /* ─── PRIVATE DINING ─── */
-    .private-section { padding: 120px 0; }
+    .private-section {
+      padding: 120px 0;
+      background:
+        radial-gradient(ellipse at 30% 70%, rgba(201,169,110,0.02) 0%, transparent 60%),
+        var(--bg);
+    }
 
     .private-grid {
       display: grid;
@@ -391,14 +623,22 @@
     }
 
     .private-rooms li {
+      padding: 14px 20px;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #151412, #1a1816);
+      border: 1px solid rgba(201,169,110,0.12);
       font-size: 0.85rem;
       color: var(--text-secondary);
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.4s ease;
+    }
+
+    .private-rooms li:hover {
+      border-color: rgba(201,169,110,0.3);
+      box-shadow: 0 4px 16px rgba(201,169,110,0.06);
     }
 
     .private-rooms li strong {
-      color: var(--text);
+      color: var(--gold);
       font-weight: 400;
     }
 
@@ -408,7 +648,10 @@
     }
 
     /* ─── GALLERY ─── */
-    .gallery-section { padding: 120px 0; }
+    .gallery-section {
+      padding: 120px 0;
+      background: var(--bg-warm);
+    }
 
     .gallery-header {
       text-align: center;
@@ -432,6 +675,7 @@
     .gallery-item {
       overflow: hidden;
       position: relative;
+      cursor: pointer;
     }
 
     .gallery-item img {
@@ -439,6 +683,33 @@
     }
 
     .gallery-item:hover img { transform: scale(1.05); }
+
+    /* Gallery overlay label */
+    .gallery-item .gallery-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10,10,10,0.6);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .gallery-item:hover .gallery-label {
+      opacity: 1;
+    }
+
+    .gallery-label span {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--text);
+      letter-spacing: 0.04em;
+      padding: 8px 20px;
+      border: 1px solid rgba(201,169,110,0.3);
+    }
 
     .gallery-item:nth-child(1) { aspect-ratio: 3 / 2; }
     .gallery-item:nth-child(2) { aspect-ratio: 3 / 2; }
@@ -448,7 +719,12 @@
     .gallery-item:nth-child(6) { display: none; }
 
     /* ─── VISIT ─── */
-    .visit-section { padding: 120px 0; }
+    .visit-section {
+      padding: 120px 0;
+      background:
+        radial-gradient(ellipse at 70% 50%, rgba(201,169,110,0.02) 0%, transparent 60%),
+        var(--bg);
+    }
 
     .visit-header {
       text-align: center;
@@ -472,6 +748,7 @@
       aspect-ratio: 4 / 3;
       background: #141414;
       overflow: hidden;
+      border: 1px solid rgba(201,169,110,0.1);
     }
 
     .visit-map iframe {
@@ -484,7 +761,7 @@
     .visit-info h3 {
       font-size: 1.1rem;
       margin-bottom: 12px;
-      color: var(--text);
+      color: var(--gold);
     }
 
     .visit-info p {
@@ -505,6 +782,7 @@
     .newsletter-section {
       padding: 120px 0;
       text-align: center;
+      background: var(--bg-warmer);
     }
 
     .newsletter-section p {
@@ -525,8 +803,8 @@
     .newsletter-form input {
       flex: 1;
       padding: 14px 20px;
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,169,110,0.15);
       border-right: none;
       color: var(--text);
       font-family: var(--font-sans);
@@ -559,7 +837,16 @@
     .footer {
       padding: 80px 0 48px;
       text-align: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: var(--bg);
+      position: relative;
+    }
+
+    .footer-gold-rule {
+      width: 100%;
+      max-width: 200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 60px;
     }
 
     .footer-logo img {
@@ -567,6 +854,45 @@
       width: auto;
       object-fit: contain;
       margin: 0 auto 24px;
+    }
+
+    .footer-address {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+      margin-bottom: 28px;
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(201,169,110,0.2);
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .footer-social a svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
     }
 
     .footer p {
@@ -582,7 +908,24 @@
 
     .footer a:hover { color: var(--gold); }
 
-    .footer-reserve { margin-top: 32px; }
+    .footer-reserve {
+      margin-top: 36px;
+    }
+
+    .footer-reserve .btn-gold {
+      padding: 16px 48px;
+      background: rgba(201,169,110,0.06);
+    }
+
+    .footer-reserve .btn-gold:hover {
+      background: var(--gold);
+    }
+
+    .footer-copy {
+      margin-top: 40px;
+      font-size: 0.65rem;
+      color: rgba(160,152,136,0.5);
+    }
 
     /* ─── MOBILE ─── */
     @media (max-width: 768px) {
@@ -602,7 +945,8 @@
       .visit-section,
       .newsletter-section { padding: 80px 0; }
 
-      .menu-grid { grid-template-columns: 1fr; gap: 32px; }
+      .menu-grid { grid-template-columns: 1fr; gap: 20px; }
+      .menu-item { padding: 2rem; }
 
       .wine-card { padding: 48px 28px; margin: 0 24px; }
 
@@ -631,7 +975,9 @@
         gap: 0;
       }
 
-      .newsletter-form input { border-right: 1px solid rgba(255, 255, 255, 0.12); border-bottom: none; }
+      .newsletter-form input { border-right: 1px solid rgba(201,169,110,0.15); border-bottom: none; }
+
+      .hero-scroll { bottom: 24px; }
     }
 
     /* ─── REVEAL ─── */
@@ -681,7 +1027,16 @@
       <p class="hero-tagline reveal" id="heroTagline">Elevated Italian Cuisine &middot; Est. 1998</p>
       <a href="https://www.opentable.ca/r/la-terrazza-vancouver" target="_blank" rel="noopener" class="btn-gold reveal" id="heroCta">Reserve a Table</a>
     </div>
+    <div class="hero-scroll" id="heroScroll">
+      <div class="hero-scroll-line"></div>
+      <div class="hero-scroll-chevron"></div>
+    </div>
   </section>
+
+  <!-- DIAMOND DIVIDER -->
+  <div class="diamond-divider" style="padding: 60px 24px;">
+    <span>&#9670;</span>
+  </div>
 
   <!-- PHILOSOPHY -->
   <section class="philosophy" id="about">
@@ -696,12 +1051,17 @@
     </div>
   </section>
 
+  <!-- DIAMOND DIVIDER -->
+  <div class="diamond-divider" style="padding: 0 24px;">
+    <span>&#9670;</span>
+  </div>
+
   <!-- MENU HIGHLIGHTS -->
   <section class="menu-section" id="menu">
     <div class="container">
       <div class="menu-header reveal">
-        <h2>The Menu</h2>
-        <p>Italian tradition meets West Coast freshness.</p>
+        <h2 class="section-heading">The Menu</h2>
+        <p class="section-subtitle">Italian tradition meets West Coast freshness</p>
       </div>
       <div class="menu-grid">
         <div class="menu-item reveal">
@@ -727,10 +1087,20 @@
     </div>
   </section>
 
+  <!-- DIAMOND DIVIDER -->
+  <div class="diamond-divider" style="padding: 0 24px;">
+    <span>&#9670;</span>
+  </div>
+
   <!-- WINE -->
   <section class="wine-section" id="wine">
     <div class="container">
       <div class="wine-card reveal">
+        <div class="wine-corners"></div>
+        <div class="wine-badge">
+          <span class="wine-badge-star">&#9733;</span>
+          Wine Spectator Award of Excellence
+        </div>
         <h2>Carta dei Vini</h2>
         <p>Recognized by Wine Spectator, our cellar of 200+ Italian labels is curated to complement every dish. From bold Barolo to crisp Vermentino, our sommelier team will guide your journey.</p>
         <a href="https://winelist-lt.vercel.app" target="_blank" rel="noopener" class="btn-gold">Explore Our Wine List</a>
@@ -738,11 +1108,16 @@
     </div>
   </section>
 
+  <!-- DIAMOND DIVIDER -->
+  <div class="diamond-divider" style="padding: 0 24px;">
+    <span>&#9670;</span>
+  </div>
+
   <!-- PRIVATE DINING -->
   <section class="private-section" id="private">
     <div class="private-grid">
       <div class="private-text reveal">
-        <h2>Private Events</h2>
+        <h2 class="section-heading">Private Events</h2>
         <p>Host unforgettable celebrations in our elegant private spaces. Whether an intimate dinner or a grand reception, our team will craft every detail to perfection.</p>
         <ul class="private-rooms">
           <li><strong>Terrazza Room</strong> &mdash; 17' &times; 36', up to 50 seated / 75 standing</li>
@@ -760,31 +1135,41 @@
   <!-- GALLERY -->
   <section class="gallery-section">
     <div class="gallery-header reveal">
-      <h2>Gallery</h2>
+      <h2 class="section-heading">Gallery</h2>
     </div>
     <div class="gallery-grid">
       <div class="gallery-item reveal">
-        <img src="https://laterrazza.ca/wp-content/uploads/2025/06/untitled-190-1024x683.jpg" alt="La Terrazza">
+        <img src="https://laterrazza.ca/wp-content/uploads/2025/06/untitled-190-1024x683.jpg" alt="The Dining Room">
+        <div class="gallery-label"><span>The Dining Room</span></div>
       </div>
       <div class="gallery-item reveal">
-        <img src="https://laterrazza.ca/wp-content/uploads/2025/06/AdobeStock_334694464-1024x576.jpeg" alt="La Terrazza">
+        <img src="https://laterrazza.ca/wp-content/uploads/2025/06/AdobeStock_334694464-1024x576.jpeg" alt="Fresh Ingredients">
+        <div class="gallery-label"><span>Fresh Ingredients</span></div>
       </div>
       <div class="gallery-item reveal">
-        <img src="https://laterrazza.ca/wp-content/uploads/2025/06/487046957_1211662460964634_116235635139251001_n-819x1024.jpg" alt="La Terrazza">
+        <img src="https://laterrazza.ca/wp-content/uploads/2025/06/487046957_1211662460964634_116235635139251001_n-819x1024.jpg" alt="Our Cuisine">
+        <div class="gallery-label"><span>Our Cuisine</span></div>
       </div>
       <div class="gallery-item reveal">
-        <img src="https://laterrazza.ca/wp-content/uploads/2025/06/AdobeStock_334732450-1024x683.jpeg" alt="La Terrazza">
+        <img src="https://laterrazza.ca/wp-content/uploads/2025/06/AdobeStock_334732450-1024x683.jpeg" alt="The Kitchen">
+        <div class="gallery-label"><span>The Kitchen</span></div>
       </div>
       <div class="gallery-item reveal">
-        <img src="https://laterrazza.ca/wp-content/uploads/2025/06/AdobeStock_350349589-683x1024.jpeg" alt="La Terrazza">
+        <img src="https://laterrazza.ca/wp-content/uploads/2025/06/AdobeStock_350349589-683x1024.jpeg" alt="Wine Selection">
+        <div class="gallery-label"><span>Wine Selection</span></div>
       </div>
     </div>
   </section>
 
+  <!-- DIAMOND DIVIDER -->
+  <div class="diamond-divider" style="padding: 60px 24px 0;">
+    <span>&#9670;</span>
+  </div>
+
   <!-- VISIT -->
   <section class="visit-section">
     <div class="visit-header reveal">
-      <h2>Visit Us</h2>
+      <h2 class="section-heading">Visit Us</h2>
     </div>
     <div class="visit-grid">
       <div class="visit-map">
@@ -807,6 +1192,9 @@
   <section class="newsletter-section">
     <div class="container">
       <div class="reveal">
+        <div class="diamond-divider" style="margin-bottom: 48px;">
+          <span>&#9670;</span>
+        </div>
         <p>Join our newsletter for exclusive tastings, events, and invitations.</p>
         <form class="newsletter-form" onsubmit="event.preventDefault();">
           <input type="email" placeholder="Your email address" required aria-label="Email address">
@@ -819,14 +1207,26 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
+      <div class="footer-gold-rule"></div>
       <div class="footer-logo">
         <img src="https://laterrazza.ca/wp-content/uploads/2018/04/La-Terrazza-New-Logo@2x.png" alt="La Terrazza">
       </div>
-      <p>&copy; 2026 La Terrazza. All rights reserved.</p>
-      <p><a href="https://www.instagram.com/laterrazzarestaurant/" target="_blank" rel="noopener">@laterrazzarestaurant</a></p>
-      <div class="footer-reserve">
-        <a href="https://www.opentable.ca/r/la-terrazza-vancouver" target="_blank" rel="noopener" class="btn-gold">Reserve a Table</a>
+      <p class="footer-address">La Terrazza &middot; 1088 Cambie Street &middot; Yaletown, Vancouver</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/laterrazzarestaurant/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/LaTerrrazza/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="tel:6048994449" aria-label="Phone">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </a>
       </div>
+      <div class="footer-reserve">
+        <a href="https://www.opentable.ca/r/la-terrazza-vancouver" target="_blank" rel="noopener" class="btn-gold">Reserve Your Table</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 La Terrazza. All rights reserved.</p>
     </div>
   </footer>
 
@@ -840,6 +1240,17 @@
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── Hide scroll indicator on scroll ──
+    const heroScroll = document.getElementById('heroScroll');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        heroScroll.style.opacity = '0';
+        heroScroll.style.transition = 'opacity 0.5s ease';
+      } else {
+        heroScroll.style.opacity = '0.5';
+      }
     }, { passive: true });
 
     // ── Mobile menu ──
