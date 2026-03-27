@@ -145,14 +145,6 @@
       will-change: transform, opacity;
     }
 
-    .gsap-clip {
-      will-change: clip-path;
-    }
-
-    .gsap-scale {
-      will-change: transform, opacity;
-    }
-
     /* ─── Button ─── */
     .btn {
       display: inline-block;
@@ -318,29 +310,14 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(201, 169, 110, 0.03) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(201, 169, 110, 0.02) 0%, transparent 40%),
-        linear-gradient(180deg, #0a0a0a 0%, #0d0c0a 50%, #0a0a0a 100%);
+      background: url('https://laterrazza.ca/wp-content/uploads/2025/06/untitled-190-2048x1365.jpg') center center / cover no-repeat;
       z-index: 0;
-    }
-
-    .hero-texture {
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a96e' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      z-index: 1;
     }
 
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg,
-        rgba(10, 10, 10, 0.3) 0%,
-        rgba(10, 10, 10, 0.1) 40%,
-        rgba(10, 10, 10, 0.5) 80%,
-        rgba(10, 10, 10, 0.95) 100%
-      );
+      background: rgba(0, 0, 0, 0.65);
       z-index: 2;
     }
 
@@ -456,15 +433,7 @@
     .about-image {
       position: relative;
       aspect-ratio: 4/5;
-      background: linear-gradient(135deg, #151412 0%, #1a1816 50%, #12110f 100%);
       overflow: hidden;
-    }
-
-    .about-image::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9a96e' fill-opacity='0.03'%3E%3Ccircle cx='50' cy='50' r='1'/%3E%3C/g%3E%3C/svg%3E");
     }
 
     .about-image::after {
@@ -477,19 +446,10 @@
       border: 1px solid var(--border-gold);
     }
 
-    .about-image-inner {
-      position: absolute;
-      inset: 2rem;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .about-image-inner svg {
-      width: 60px;
-      height: 60px;
-      opacity: 0.15;
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     /* ─── Menu ─── */
@@ -669,15 +629,14 @@
       aspect-ratio: 4/3;
       overflow: hidden;
       cursor: pointer;
-      background: linear-gradient(135deg, #13120f 0%, #1a1816 40%, #151310 100%);
+      background: var(--bg-card);
       will-change: transform, opacity;
     }
 
-    .gallery-item::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9a96e' fill-opacity='0.02'%3E%3Ccircle cx='40' cy='40' r='0.8'/%3E%3C/g%3E%3C/svg%3E");
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
@@ -689,7 +648,7 @@
       transition: background 0.4s;
     }
 
-    .gallery-item:hover::before { transform: scale(1.08); }
+    .gallery-item:hover img { transform: scale(1.08); }
     .gallery-item:hover::after { background: rgba(201, 169, 110, 0.05); }
 
     .gallery-item-label {
@@ -1063,7 +1022,7 @@
   <!-- ═══ Navbar ═══ -->
   <nav class="navbar" id="navbar">
     <div class="container">
-      <a href="#" class="nav-logo">La <em>Terrazza</em></a>
+      <a href="#" class="nav-logo"><img src="https://laterrazza.ca/wp-content/uploads/2018/04/La-Terrazza-New-Logo@2x.png" alt="La Terrazza" style="height: 40px; width: auto;"></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
         <li><a href="#menu">Menu</a></li>
@@ -1081,7 +1040,6 @@
   <!-- ═══ Hero ═══ -->
   <section class="hero" id="hero">
     <div class="hero-bg"></div>
-    <div class="hero-texture"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="hero-badge">Yaletown, Vancouver</p>
@@ -1109,7 +1067,7 @@
       <div class="about-grid">
         <div class="about-text">
           <span class="section-label gsap-fade">Our Story</span>
-          <h2 class="heading-lg gsap-clip">A Quarter Century of<br>Italian Excellence</h2>
+          <h2 class="heading-lg gsap-fade">A Quarter Century of<br>Italian Excellence</h2>
           <p class="body-text gsap-fade">
             Since 1998, La Terrazza has defined Italian dining in Vancouver. Heirloom family recipes meet seasonal West-Coast produce, while our award-winning cellar of Italian wines ensures every dish finds its perfect partner.
           </p>
@@ -1118,12 +1076,8 @@
           </p>
           <p class="about-signature gsap-fade">— La Famiglia</p>
         </div>
-        <div class="about-image gsap-scale">
-          <div class="about-image-inner">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" color="#c9a96e">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-            </svg>
-          </div>
+        <div class="about-image gsap-fade">
+          <img src="https://laterrazza.ca/wp-content/uploads/2025/06/AdobeStock_350349589-scaled.jpeg" alt="La Terrazza dining experience">
         </div>
       </div>
     </div>
@@ -1136,7 +1090,7 @@
     <div class="container">
       <div class="menu-header">
         <span class="section-label gsap-fade">Curated Flavours</span>
-        <h2 class="heading-lg gsap-clip">Our Menu</h2>
+        <h2 class="heading-lg gsap-fade">Our Menu</h2>
         <p class="body-text gsap-fade">
           A seasonal celebration of Italian tradition and Pacific Northwest terroir.
         </p>
@@ -1201,7 +1155,7 @@
     <div class="container">
       <div class="private-header">
         <span class="section-label gsap-fade">Exclusive Spaces</span>
-        <h2 class="heading-lg gsap-clip">Private Events</h2>
+        <h2 class="heading-lg gsap-fade">Private Events</h2>
         <p class="body-text gsap-fade">
           From intimate dinners to grand celebrations, our private spaces offer an unforgettable backdrop for every occasion.
         </p>
@@ -1252,26 +1206,32 @@
     <div class="container">
       <div class="gallery-header">
         <span class="section-label gsap-fade">Ambiance</span>
-        <h2 class="heading-lg gsap-clip">Gallery</h2>
+        <h2 class="heading-lg gsap-fade">Gallery</h2>
       </div>
 
       <div class="gallery-grid">
-        <div class="gallery-item gsap-scale">
+        <div class="gallery-item">
+          <img src="https://laterrazza.ca/wp-content/uploads/2025/06/untitled-190-1024x683.jpg" alt="The Dining Room">
           <div class="gallery-item-label"><span>The Dining Room</span></div>
         </div>
-        <div class="gallery-item gsap-scale">
+        <div class="gallery-item">
+          <img src="https://laterrazza.ca/wp-content/uploads/2025/06/AdobeStock_334694464-1024x576.jpeg" alt="Seasonal Antipasti">
           <div class="gallery-item-label"><span>Seasonal Antipasti</span></div>
         </div>
-        <div class="gallery-item gsap-scale">
+        <div class="gallery-item">
+          <img src="https://laterrazza.ca/wp-content/uploads/2025/06/AdobeStock_334732450-1024x683.jpeg" alt="The Wine Cellar">
           <div class="gallery-item-label"><span>The Wine Cellar</span></div>
         </div>
-        <div class="gallery-item gsap-scale">
+        <div class="gallery-item">
+          <img src="https://laterrazza.ca/wp-content/uploads/2018/03/enoteca-bkg-1024x683.jpg" alt="House-made Pasta">
           <div class="gallery-item-label"><span>House-made Pasta</span></div>
         </div>
-        <div class="gallery-item gsap-scale">
+        <div class="gallery-item">
+          <img src="https://laterrazza.ca/wp-content/uploads/2025/06/487046957_1211662460964634_116235635139251001_n-819x1024.jpg" alt="The Patio">
           <div class="gallery-item-label"><span>The Patio</span></div>
         </div>
-        <div class="gallery-item gsap-scale">
+        <div class="gallery-item">
+          <img src="https://laterrazza.ca/wp-content/uploads/2025/06/AdobeStock_350349589-683x1024.jpeg" alt="Dessert Service">
           <div class="gallery-item-label"><span>Dessert Service</span></div>
         </div>
       </div>
@@ -1296,7 +1256,7 @@
 
         <div class="location-info">
           <span class="section-label gsap-fade">Find Us</span>
-          <h2 class="heading-lg gsap-clip" style="margin-bottom: 2.5rem;">Visit La Terrazza</h2>
+          <h2 class="heading-lg gsap-fade" style="margin-bottom: 2.5rem;">Visit La Terrazza</h2>
 
           <div class="location-detail gsap-fade">
             <p class="location-detail-label">Address</p>
@@ -1341,7 +1301,7 @@
     <div class="container">
       <div class="newsletter-inner">
         <span class="section-label gsap-fade">Stay Connected</span>
-        <h2 class="heading-lg gsap-clip">La Terrazza Insider</h2>
+        <h2 class="heading-lg gsap-fade">La Terrazza Insider</h2>
         <p class="newsletter-text gsap-fade">
           Join our newsletter and be the first to discover exclusive tastings, private events, and special invitations.
         </p>
@@ -1357,7 +1317,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
-        <a href="#" class="footer-logo">La <em>Terrazza</em></a>
+        <a href="#" class="footer-logo"><img src="https://laterrazza.ca/wp-content/uploads/2018/04/La-Terrazza-New-Logo@2x.png" alt="La Terrazza" style="height: 36px; width: auto;"></a>
 
         <div class="footer-links">
           <a href="#about">About</a>
@@ -1401,7 +1361,7 @@
     const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     heroTl
-      .from('.hero-badge', { y: -20, opacity: 0, duration: 1 }, 0.3)
+      .from('.hero-badge', { y: 30, opacity: 0, duration: 1 }, 0.3)
       .from('.hero-title', { y: 30, opacity: 0, duration: 1.2 }, 0.5)
       .from('.hero-tagline', { y: 30, opacity: 0, duration: 1 }, 0.9)
       .from('.hero-cta', { y: 30, opacity: 0, duration: 1 }, 1.2)
@@ -1452,21 +1412,6 @@
       });
     });
 
-    /* ─── Section headings: clip-path reveal ─── */
-    gsap.utils.toArray('.gsap-clip').forEach(heading => {
-      gsap.from(heading, {
-        clipPath: 'inset(0 100% 0 0)',
-        duration: 1.2,
-        ease: 'power3.inOut',
-        scrollTrigger: {
-          trigger: heading,
-          start: 'top 85%',
-          toggleActions: 'play none none none'
-        }
-      });
-      heading.style.clipPath = 'inset(0 0% 0 0)';
-    });
-
     /* ─── General fade-in elements ─── */
     gsap.utils.toArray('.gsap-fade').forEach(el => {
       gsap.from(el, {
@@ -1510,9 +1455,9 @@
       }
     });
 
-    /* ─── Gallery images: scale from 0.9 to 1 with opacity fade ─── */
+    /* ─── Gallery images: vertical fade-in ─── */
     gsap.from('.gallery-grid .gallery-item', {
-      scale: 0.9,
+      y: 40,
       opacity: 0,
       duration: 1,
       ease: 'power3.out',
